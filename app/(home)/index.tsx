@@ -1,12 +1,32 @@
 import { colors } from '@/assets/styles/colors';
 import { gs } from '@/assets/styles/globalstyle';
 import InputText from '@/components/inputText';
+import NewsworthyItem from '@/components/newsworthyItem';
 import { useNavigation } from '@react-navigation/native';
 import React, { JSX } from 'react';
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 function Home(): JSX.Element {
   const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate('(detail)');
+  }
+
+  const newsworthyData = [
+    {
+      title: 'Hajime',
+      address: 'Pantai Utara No.90',
+      price: '$421/day',
+      image: require('@/assets/gambar/item_2_a.png'),
+    },
+    {
+      title: 'Deepwork',
+      address: 'Pantai Selatan No.1',
+      price: '$500/day',
+      image: require('@/assets/gambar/item_3_a.png'),
+    },
+  ]
 
   const renderHeader = () => {
     return (
@@ -78,13 +98,37 @@ function Home(): JSX.Element {
     );
   };
 
+  const renderNewsworthy = () => {
+    return (
+      <View style={styles.sectionContainer}>
+        <Text style={[styles.sectionTitle, gs.h1]}>Newsworthy</Text>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={newsworthyData}
+          keyExtractor={item => item.title}
+          renderItem={({item}) => (
+            <NewsworthyItem 
+              title={item.title}
+              address={item.address}
+              price={item.price}
+              image={item.image}
+              onPress={handlePress}
+            />
+          )}
+        />
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container}>
-      <View>
+      <View style={styles.contentContainer}>
         {renderHeader()}
         {renderSearch()}
-        <ScrollView>
+        <ScrollView style={styles.scrollContainer}>
           {renderPopularSection()}
+          {renderNewsworthy()}
         </ScrollView>
       </View>
     </View>
@@ -95,6 +139,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.greyLight,
+  },
+  contentContainer: {
+    flex: 1,
+    backgroundColor: colors.white,
+    borderBottomLeftRadius: 32,
+    borderBottomRightRadius: 32,
   },
   headerContainer: {
     ...gs.flexRow,
@@ -149,7 +199,10 @@ const styles = StyleSheet.create({
   popularPriceLabel: {
     ...gs.font600,
     ...gs.textPrimary,
-  }
+  },
+  scrollContainer: {
+    height: '100%'
+  },
 });
 
 export default Home;
