@@ -70,8 +70,8 @@ function Home(): JSX.Element {
             <Text style={[gs.h2, gs.textBlack]}>IndoorWork</Text>
             <Text style={gs.textGrey}>GedungAshta No.10</Text>
           </View>
-          <View>
-            <Text>$599/day</Text>
+          <View style={styles.popularPriceContainer}>
+            <Text style={styles.popularPriceLabel}>$599/day</Text>
           </View>
         </View>
       </View>
@@ -136,6 +136,19 @@ const styles = StyleSheet.create({
   popularContent: {
     ...gs.flexRow,
     ...gs.justifyBetween,
+    marginTop: 10,
+  },
+  popularPriceContainer: {
+    ...gs.justifyCenter,
+    ...gs.itemsCenter,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 8,
+    backgroundColor: colors.secondary,
+  },
+  popularPriceLabel: {
+    ...gs.font600,
+    ...gs.textPrimary,
   }
 });
 
