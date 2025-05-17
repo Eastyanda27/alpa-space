@@ -1,5 +1,6 @@
 import { colors } from '@/assets/styles/colors';
 import { gs } from '@/assets/styles/globalstyle';
+import BottomNav from '@/components/bottomNav';
 import InputText from '@/components/inputText';
 import NewsworthyItem from '@/components/newsworthyItem';
 import { useNavigation } from '@react-navigation/native';
@@ -131,6 +132,7 @@ function Home(): JSX.Element {
           {renderNewsworthy()}
         </ScrollView>
       </View>
+      <BottomNav/>
     </View>
   )
 }
