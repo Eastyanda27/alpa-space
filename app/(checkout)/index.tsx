@@ -2,10 +2,13 @@ import { colors } from '@/assets/styles/colors';
 import { gs } from '@/assets/styles/globalstyle';
 import CardDetail from '@/components/cardDetail';
 import Header from '@/components/header';
+import { useNavigation } from '@react-navigation/native';
 import React, { JSX } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 function Checkout(): JSX.Element {
+    const navigation = useNavigation();
+
     const checkoutData = [
         {
             label: 'Price per day',
@@ -77,6 +80,36 @@ function Checkout(): JSX.Element {
         )
     }
 
+    const renderPaymentMethod = () => {
+        return (
+            <View style={styles.sectionContainer}>
+                <Text style={styles.titleContainer}>Payment</Text>
+                <View style={styles.paymentContainer}>
+                    <TouchableOpacity style={styles.paymentButton}>
+                        <Image source={require('@/assets/icons/wallet.png')}/>
+                        <Text style={[gs.h5, gs.textBlack]}>MyWallet</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.paymentButton}>
+                        <Image source={require('@/assets/icons/mastercard.png')}/>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    }
+
+    const renderPayNow = () => {
+        return (
+            <View style={styles.sectionContainer}>
+                <TouchableOpacity style={styles.proceedButton} onPress={() => {
+                    navigation.navigate('(success)')
+                }}>
+                    <Text style={[gs.h4, gs.textWhite]}>Pay Now</Text>
+                    <Image source={require('@/assets/icons/pay.png')} style={styles.icon}/>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+
     return (
         <View style={styles.container}>
             <Header title="Checkout" subTitle="Ready to start working?"/>
@@ -84,9 +117,9 @@ function Checkout(): JSX.Element {
                 <ScrollView>
                     {renderCheckoutDetail()}
                     {renderCheckoutData()}
-                    {/* {renderPaymentMethod()} */}
+                    {renderPaymentMethod()}
                 </ScrollView>
-                {/* {renderPayNoq()} */}
+                {renderPayNow()}
             </View>
         </View>
     )
@@ -110,7 +143,34 @@ const styles = StyleSheet.create({
         ...gs.flexRow,
         ...gs.justifyBetween,
         paddingVertical: 14,
-    }
+    },
+    paymentContainer: {
+        ...gs.flexRow,
+        marginHorizontal: -10,
+        marginBottom: 30,
+    },
+    paymentButton: {
+        ...gs.justifyCenter,
+        ...gs.itemsCenter,
+        ...gs.cornerLG,
+        flex: 1,
+        paddingVertical: 24,
+        paddingHorizontal: 52,
+        borderWidth: 1,
+        borderColor: colors.greyContainer,
+        marginHorizontal: 14,
+    },
+    proceedButton: {
+        ...gs.flexRow,
+        ...gs.itemsCenter,
+        ...gs.justifyCenter,
+        ...gs.cornerMD,
+        backgroundColor: colors.primary,
+        padding: 14,
+    },
+    icon: {
+        marginLeft: 4,
+    },
 });
 
 export default Checkout;
