@@ -7,6 +7,7 @@ import Booking from './(booking)';
 import Checkout from './(checkout)';
 import Detail from './(detail)';
 import Home from './(home)';
+import Success from './(success)';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ function App(): JSX.Element {
         <Stack.Screen name='(detail)' component={Detail}/>
         <Stack.Screen name='(booking)' component={Booking}/>
         <Stack.Screen name='(checkout)' component={Checkout}/>
+        <Stack.Screen name='(success)' component={Success}/>
       </Stack.Navigator>
     </SafeAreaView>
   )
