@@ -3,6 +3,7 @@ import React, { JSX } from 'react';
 
 import { SafeAreaView, StyleSheet } from 'react-native';
 import 'react-native-reanimated';
+import Booking from './(booking)';
 import Detail from './(detail)';
 import Home from './(home)';
 
@@ -14,6 +15,7 @@ function App(): JSX.Element {
       <Stack.Navigator initialRouteName='(home)' screenOptions={{ headerShown: false }}>
         <Stack.Screen name='(home)' component={Home}/>
         <Stack.Screen name='(detail)' component={Detail}/>
+        <Stack.Screen name='(booking)' component={Booking}/>
       </Stack.Navigator>
     </SafeAreaView>
   )
