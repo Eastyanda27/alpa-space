@@ -4,6 +4,7 @@ import React, { JSX } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import 'react-native-reanimated';
 import Booking from './(booking)';
+import Checkout from './(checkout)';
 import Detail from './(detail)';
 import Home from './(home)';
 
@@ -16,6 +17,7 @@ function App(): JSX.Element {
         <Stack.Screen name='(home)' component={Home}/>
         <Stack.Screen name='(detail)' component={Detail}/>
         <Stack.Screen name='(booking)' component={Booking}/>
+        <Stack.Screen name='(checkout)' component={Checkout}/>
       </Stack.Navigator>
     </SafeAreaView>
   )
