@@ -1,14 +1,34 @@
 import { colors } from '@/assets/styles/colors';
 import Header from '@/components/header';
+import SliderItem from '@/components/sliderItem';
 import React, { JSX } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
 
 function Detail(): JSX.Element {
+  const slider = [
+    require('@/assets/gambar/item_2_a.png'),
+    require('@/assets/gambar/item_2_b.png'),
+    require('@/assets/gambar/item_2_c.png')
+  ]
+
+  const renderSlider = () => {
+    return (
+      <View style= {styles.sectionContainer}>
+        <FlatList 
+          data={slider} 
+          keyExtractor={({index}) => index}
+          renderItem={({item}) => <SliderItem image={item}/>} 
+          horizontal 
+          showsHorizontalScrollIndicator={false}/>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <Header title="Office Detail" subTitle="Space available for today" showRightButton/>
       <ScrollView>
-        {/* {renderSlider()} */}
+        {renderSlider()}
         {/* {renderTitle()} */}
         {/* {renderDescription()} */}
         {/* {renderOwner()} */}
@@ -22,6 +42,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
+  },
+  sectionContainer: {
+    paddingHorizontal: 24,
+    paddingBottom: 24,
   },
 });
 
